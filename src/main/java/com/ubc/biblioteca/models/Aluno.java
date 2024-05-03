@@ -1,6 +1,13 @@
 // Classe para cadastrar e remover alunos
 package com.ubc.biblioteca.models;
 
+import com.ubc.biblioteca.Conexao;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 public class Aluno{
     private int id;
     private String nome;
@@ -8,15 +15,25 @@ public class Aluno{
 
     public Aluno() {}
 
-    public void cadastrar(int id, String nome, String rgm) {
-        this.id = id;
-        this.nome = nome;
-        this.rgm = rgm;
+    public void cadastrar(String nome, String rgm) throws SQLException {
+        Conexao connect = new Conexao();
+        Connection con = connect.getConnection();
+        Statement stmt = con.createStatement();
+        stmt.execute("INSERT INTO alunos (nome,rgm) VALUES ('" + nome + "', '" + rgm + "')");
+
+        System.out.println("\nAluno cadastrado com sucesso!\n");
+
     }
 
-    public void listarInfo() {
-        System.out.println("ID: " + id);
-        System.out.println("Nome: " + nome);
-        System.out.println("RGM: " + rgm);
+    public void listarAlunos() throws SQLException {
+        Conexao connect = new Conexao();
+        Connection con = connect.getConnection();
+        Statement stmt = con.createStatement();
+        ResultSet resultSet = stmt.executeQuery("SELECT * FROM alunos");
+        while (resultSet.next()) {
+            System.out.println("Informações do Aluno:");
+            System.out.println("Nome - " + resultSet.getString("nome"));
+            System.out.println("RGM - " + resultSet.getString("rgm") + "\n");
+        }
     }
 }
