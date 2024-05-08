@@ -14,9 +14,8 @@ import java.time.format.DateTimeFormatter;
 
 public class BibliotecaApplication {
 
-	public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        SpringApplication.run(BibliotecaApplication.class, args);
-
+	public static void main(String[] args) {
+		SpringApplication.run(BibliotecaApplication.class, args);
 
 
 	}
