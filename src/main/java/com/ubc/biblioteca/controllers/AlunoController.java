@@ -1,20 +1,17 @@
 package com.ubc.biblioteca.controllers;
 
-import com.ubc.biblioteca.models.Aluno;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
 import java.sql.SQLException;
 
+import org.springframework.stereotype.Controller;
+
+import com.ubc.biblioteca.models.Aluno;
+
 @Controller
-@RequestMapping("/aluno")
 public class AlunoController {
 
     private final Aluno alunoModel = new Aluno();
 
-    @PostMapping("/cadastrar")
-    @ResponseBody
-    public String cadastrarAluno(@RequestParam String nome, @RequestParam String rgm) {
+    public String cadastrarAluno(String nome, String rgm) {
         try {
             alunoModel.cadastrar(nome, rgm);
             return "Aluno cadastrado com sucesso!";
@@ -24,8 +21,6 @@ public class AlunoController {
         }
     }
 
-    @GetMapping("/listar")
-    @ResponseBody
     public String listarAlunos() {
         try {
             alunoModel.listarAlunos();

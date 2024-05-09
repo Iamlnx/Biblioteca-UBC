@@ -1,21 +1,18 @@
 package com.ubc.biblioteca.controllers;
 
-import com.ubc.biblioteca.models.Emprestimo;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
 import java.sql.SQLException;
 import java.time.LocalDate;
 
+import org.springframework.stereotype.Controller;
+
+import com.ubc.biblioteca.models.Emprestimo;
+
 @Controller
-@RequestMapping("/emprestimo")
 public class EmprestimoController {
 
     private final Emprestimo emprestimoModel = new Emprestimo();
 
-    @PostMapping("/emprestar")
-    @ResponseBody
-    public String realizarEmprestimo(@RequestParam int idLivro, @RequestParam int idAluno, @RequestParam String dataRetirada) {
+    public String realizarEmprestimo(int idLivro, int idAluno, String dataRetirada) {
         try {
             LocalDate dataRetiradaFormatted = LocalDate.parse(dataRetirada);
             emprestimoModel.emprestimo(idLivro, idAluno, dataRetiradaFormatted);
@@ -26,9 +23,7 @@ public class EmprestimoController {
         }
     }
 
-    @PostMapping("/devolver")
-    @ResponseBody
-    public String realizarDevolucao(@RequestParam int idLivro, @RequestParam int idAluno, @RequestParam String dataRetirada, @RequestParam String dataDevolucao) {
+    public String realizarDevolucao(int idLivro, int idAluno, String dataRetirada, String dataDevolucao) {
         try {
             LocalDate dataRetiradaFormatted = LocalDate.parse(dataRetirada);
             LocalDate dataDevolucaoFormatted = LocalDate.parse(dataDevolucao);
@@ -40,8 +35,6 @@ public class EmprestimoController {
         }
     }
 
-    @GetMapping("/listar")
-    @ResponseBody
     public String listarEmprestimos() {
         try {
             emprestimoModel.listarEmprestimos();

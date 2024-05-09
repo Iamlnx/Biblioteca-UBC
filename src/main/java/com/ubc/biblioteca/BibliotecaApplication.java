@@ -1,20 +1,22 @@
 package com.ubc.biblioteca;
 
-import com.ubc.biblioteca.Conexao;
-import com.ubc.biblioteca.models.Emprestimo;
-import com.ubc.biblioteca.models.Livro;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
+@Controller
+@RestController
+@SpringBootApplication
 public class BibliotecaApplication {
 
-	public static void main(String[] args) {
+    @GetMapping("/")
+    public String index() {
+        return "index";
+    }
+
+    public static void main(String[] args) {
 		SpringApplication.run(BibliotecaApplication.class, args);
 
 

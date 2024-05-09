@@ -3,7 +3,6 @@ package com.ubc.biblioteca;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 @SuppressWarnings("ALL")
 public class Conexao {

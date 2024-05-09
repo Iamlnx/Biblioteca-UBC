@@ -2,19 +2,14 @@ package com.ubc.biblioteca.controllers;
 
 import com.ubc.biblioteca.models.Livro;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
-
 import java.sql.SQLException;
 
 @Controller
-@RequestMapping("/livro")
 public class LivroController {
 
     private final Livro livroModel = new Livro();
 
-    @PostMapping("/cadastrar")
-    @ResponseBody
-    public String cadastrarLivro(@RequestParam String titulo, @RequestParam String autor, @RequestParam String editora, @RequestParam int paginas, @RequestParam int quantidade) {
+    public String cadastrarLivro(String titulo, String autor, String editora, int paginas, int quantidade) {
         try {
             livroModel.cadastrarLivro(titulo, autor, editora, paginas, quantidade);
             return "Livro cadastrado com sucesso!";
@@ -24,8 +19,6 @@ public class LivroController {
         }
     }
 
-    @GetMapping("/listar")
-    @ResponseBody
     public String listarLivros() {
         try {
             livroModel.listarInfo();
